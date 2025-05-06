@@ -32,7 +32,15 @@ app.post('/api/chat', async (req, res) => {
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
-                messages: [{ role: 'system', content: 'You are a bot.' }, { role: 'user', content: message }],
+                messages: [
+                    { 
+                        role: 'system', 
+                        content: 'You are a chat bot that only answers educational questions about Edge Hill University. You are only accessed by students during Freshers week to answer their questions. Use the latest factual information exclusively.'
+                    }, 
+                    { 
+                        role: 'user', 
+                        content: message 
+                    }],
                 model: 'gpt-3.5-turbo-0125',
                 max_tokens: 150,
                 temperature: 0.7
@@ -46,11 +54,8 @@ app.post('/api/chat', async (req, res) => {
         );
 
         const responseData = response.data;
-        console.log('OpenAI Response Data:', responseData);
-
         if (responseData && responseData.choices && responseData.choices.length > 0) {
             const reply = responseData.choices[0].message.content.trim();
-            console.log('Bot Reply:', reply);
             res.json({ reply });
         } else {
             console.error('Invalid response format from OpenAI:', responseData);
@@ -63,5 +68,5 @@ app.post('/api/chat', async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}/client/`);
 });

@@ -2,7 +2,7 @@ async function sendMessage() {
     const userInput = document.getElementById('user-input').value;
     if (!userInput) return;
 
-    appendMessage('You', userInput);
+    appendMessage('You', userInput, 'user');
 
     const response = await fetch('http://localhost:3000/api/chat', {
         method: 'POST',
@@ -13,14 +13,14 @@ async function sendMessage() {
     });
 
     const data = await response.json();
-    appendMessage('Bot', data.reply);
+    appendMessage('Bot', data.reply, 'bot');
     document.getElementById('user-input').value = '';
 }
 
-function appendMessage(sender, message) {
+function appendMessage(sender, message, type) {
     const chatBox = document.getElementById('chat-box');
     const messageElement = document.createElement('div');
-    messageElement.className = 'message';
+    messageElement.className = `message ${type}`;
     messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
     chatBox.appendChild(messageElement);
     chatBox.scrollTop = chatBox.scrollHeight;

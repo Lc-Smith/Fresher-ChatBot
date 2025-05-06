@@ -7,10 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="chat-box"></div>
-        <input type="text" id="user-input" placeholder="Type your question here...">
-        <button onclick="sendMessage()">Send</button>
+    <div id="container">
+        <div id="bot-logo">
+            <img src="logo.png" alt="University Logo" />
+            <div id="site-name">University Name</div>
+        </div>
+        <div id="nav-placeholder" role="navigation">
+            University Site Navigation
+        </div>
+        <div id="chat-container">
+            <div id="chat-box" aria-live="polite"></div>
+        </div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Type your question here..." aria-label="User Input">
+            <button onclick="sendMessage()" aria-label="Send message">Send</button>
+        </div>
     </div>
     <script src="js/script.js"></script>
 </body>
